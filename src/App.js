@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react"
 
 function App() {
+  const [tarefas, setTarefas] = useState([
+    "Pagar a conta de luz",
+    "Estudar React Hooks"])
+  const [input, setInput] = useState("")
+
+  function handleAdd() {
+    setTarefas([...tarefas, input])
+    setInput("")
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ul>
+        {tarefas.map((tarefa) => (
+          <li key={tarefa + 1}>{tarefa}</li>
+        ))}
+      </ul>
+
+      <input value={input} onChange={(e) => setInput(e.target.value)} />
+      <button onClick={handleAdd}>Adicionar</button>
     </div>
   );
 }
